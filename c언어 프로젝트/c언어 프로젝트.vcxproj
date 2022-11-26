@@ -129,6 +129,7 @@
   <ItemGroup>
     <ClCompile Include="main.c" />
     <ClCompile Include="screen.c" />
+    <ClCompile Include="test.c" />
     <ClCompile Include="tools.c" />
   </ItemGroup>
   <ItemGroup>
