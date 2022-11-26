@@ -4,7 +4,15 @@
 void gotoxy(int x, int y)
 {
 	COORD pos = { x, y };
+	pos.X = 2 * x; //이건 뭘까 없어도 되나? 원래 코드엔 없는데 이거 있으면 다른거에 문제 생기나
+	pos.Y = y;
 	SetConsoleCursorPosition(GetStdHandle(STD_OUTPUT_HANDLE), pos);// WIN32API 함수입니다. 이건 알필요 없어요
+
+	/*
+	COORD Pos;
+	Pos.X = 2 * x;
+	Pos.Y = y;	
+	*/
 }
 
 void textcolor(int fg_color, int bg_color)

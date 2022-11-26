@@ -2,6 +2,13 @@
 #include "screen.h"
 #include <time.h>
 
+//---------------------
+
+#include <stdio.h> //움직이기에서 가져옴
+#include <Windows.h>
+#include <conio.h>
+
+#define CD_BOTTOM_Y 30 //움직이기에서 가져옴
 #define MAXSIZE 20
 #define HUNGRYTIME 5000 // 줄어드는 시간 조절
 #define TIREDTIME 5000
@@ -221,7 +228,7 @@ int inGameDisplay() { //ㄹㅇ 진또배기 게임
 	gameButton(25, 32);
 	gotoxy(31, 33);
 	textcolor(BLACK, WHITE);
-	printf("밥주기");
+	printf("밥주기(1)");
 
 	gameButton(44, 32);
 	gotoxy(49, 33);
@@ -237,6 +244,16 @@ int inGameDisplay() { //ㄹㅇ 진또배기 게임
 	gotoxy(31, 33);
 	textcolor(BLACK, WHITE);
 	printf("밥주기");
+
+	if (GetAsyncKeyState(VK_RETURN) == TRUE)
+	{
+		break;
+	}
+	else
+	{
+		continue;
+	}
+
 
 	}
 	
@@ -325,4 +342,464 @@ int bar() { // 배고픔 졸림 이런거 나타내기 위해서
 		}
 	}
 }
+*/
+
+
+/*
+움직이기 부분
+*/
+void CD(int CD_Y) {
+	gotoxy(0, CD_Y);
+	printf("	          #@!.=@$                   \n");
+	printf("            #          @                \n");
+	printf("          @              !              \n");
+	printf("         @    '    '      !             \n");
+	printf("        !                  @            \n");
+	printf("              @-   @                    \n");
+	printf("       .     @      .                   \n");
+	printf("       @     @            @             \n");
+	printf("              ! ;@  @      @@           \n");
+	printf("                               @        \n");
+	printf("                                 @      \n");
+	printf("     @                            -     \n");
+	printf("     =                              :   \n");
+	printf("    @                                   \n");
+	printf("   @                                 @  \n");
+	printf("  ~                                   @ \n");
+	printf("                                      @ \n");
+	printf(" #                                    - \n");
+	printf(" @                                    ; \n");
+	printf(" :                                    @ \n");
+	printf("                                      ; \n");
+	printf("  @                                  @  \n");
+	printf("   $                                @   \n");
+	printf("   :=.@,                         @@.==  \n");
+}
+
+void CD_eat(int CD_Y) {
+	gotoxy(0, CD_Y);
+	int i;
+	for (i = 0; i <= 2; i++) {
+		switch (i)
+		{
+		case 0:
+			printf("				;===;                  \n");
+			printf("             -@@-     ,@@.              \n");
+			printf("           ,@            -@             \n");
+			printf("          #     ~          =.           \n");
+			printf("         *      @     @     *.          \n");
+			printf("      @@@~                   @@@*       \n");
+			printf("    ,~                      !    @      \n");
+			printf("   .,          #-   .@            @     \n");
+			printf("   @          @       *#          -     \n");
+			printf("  ,           @        #           :    \n");
+			printf("  #           #;@@;@@;;@           :    \n");
+			printf("  @                               -     \n");
+			printf("  ~                               @     \n");
+			printf("   @                             .;     \n");
+			printf("    @@;@@  @@@@@@@;@@@@@        #$      \n");
+			printf("        @@                @     .       \n");
+			printf("        @                 ,     @       \n");
+			printf("       @                   ~-   @       \n");
+			printf("      .:                    #   #       \n");
+			printf("       @!#@$#@@@@@@@@;;;--@@    ~       \n");
+			printf("       @!~@!!@  @!!#  @!!* -     ,      \n");
+			printf("       @!~@!!@  @!!#  @!!~~      ~      \n");
+			printf("       @!=@!!@  @!!:  $!! @      @      \n");
+			printf("       @!@@!!@  @!!:  =!@ @      @      \n");
+			printf("       @!@@!!@  @!!:  !!@ ,      @      \n");
+			printf("       $!@:!!#  @!!  -!!,=       @      \n");
+			printf("       !!#~!!$  @!!  =!* @       @      \n");
+			printf("        *$ !!$  @!!  @!@ ;       @      \n");
+			printf(" ~===@@@@! #!$  @!!  @!#*::::::::@   ,  \n");
+			printf("        @!-@!!  @!!  =! @               \n");
+			printf("         @$@!!  @!*  *=..               \n");
+			printf("                ;;;;@@*                 \n");
+			Sleep(300);
+			system("cls");
+			break;
+
+		case 1:
+			//printf("									     \n");
+			//printf("									     \n");
+			//printf("									     \n");
+			printf("           .-.*=======:---              \n");
+			printf("          ;;;.         ~;;~             \n");
+			printf("         *-,              -;-           \n");
+			printf("                            =.          \n");
+			printf("     -~~;.     :    -      ;**=!-       \n");
+			printf("     =                         ,=-      \n");
+			printf("    *,         =====*           .!      \n");
+			printf("    #         #~:::--@;          =.     \n");
+			printf("    ;         #.,--..~;          !.     \n");
+			printf("    #        -! :;;::!=.         =.     \n");
+			printf("    :-       -  ~,-~~~~.         =.     \n");
+			printf("     -*   .#######-$####.       :~      \n");
+			printf("        =#               .*    ~;       \n");
+			printf("       ,!                 -;   :;-      \n");
+			printf("      ,$-                 .;,   ,,      \n");
+			printf("      -!                   :-    !.     \n");
+			printf("       :#@@@@@@@@@@@@*   .@@-    *.     \n");
+			printf("       :$.@=*,  ;**$  ~==#-;      -     \n");
+			printf("       :=.@**, .@$$- ,!*=:-;      #     \n");
+			printf("       ~*=@*=~ .@#$. -$*$.!.      #     \n");
+			printf("       ;*@@*=@..@##. -#*@.=       #     \n");
+			printf("       ;;@$*$@..@@@. -#*@.;       #     \n");
+			printf("       ;;@-*$@..@@@. -#*;:        *     \n");
+			printf("       ;!@ *$@..@@@. -$$.#        .     \n");
+			printf("       ;*@.#=@..@#@..#=#.#       *.     \n");
+			printf("      -!=*.#=#..@##..#=~!,...,,,,=-,,,, \n");
+			printf("        *=;#*#..@$@..#$-#!;;;!!!!!!!!!! \n");
+			printf("        -#@:*#..#*#..#$=~               \n");
+			printf("         .. ..  . . :$-.                \n");
+			Sleep(300);
+			system("cls");
+			break;
+
+		case 2:
+			//printf("									     \n");
+			//printf("									     \n");
+			//printf("									     \n");
+			//printf("									     \n");
+			//printf("									     \n");
+			//printf("									     \n");
+			//printf("									     \n");
+			//printf("									     \n");
+			printf("                .:.                     \n");
+			printf("           ,==- .-.  :===               \n");
+			printf("         *#              -@;            \n");
+			printf("       .*.                 :$$-,.       \n");
+			printf("      .;,                      !;.      \n");
+			printf("     ;-;                        ,!      \n");
+			printf("     =-;                         =.     \n");
+			printf("    ;  ::.#=*#:-=!#! ...         =.     \n");
+			printf("    ~~ ,!!           !**, ~,    ,!      \n");
+			printf("     :!$-                 :;;;!!;;      \n");
+			printf("     .=,                   ..#,,.!.     \n");
+			printf("     .@#@@@@@@@@@@@@@* - =@@!     #     \n");
+			printf("       :$.@@@- .@=*~  .-:$-;      $     \n");
+			printf("       :#.@@@- .@$*  ,~-:-.-      -;    \n");
+			printf("       :$~@@@- .@=*  -*~$.;        #    \n");
+			printf("       ~==@##: .#=*  -=;@.=        #    \n");
+			printf("       ;$@@$#@..#**  -$*=,;        #    \n");
+			printf("       ;$@!$$@..#**  -#$.!         ;    \n");
+			printf("       ;=@.**#..#*#. :##.#        *     \n");
+			printf("       ;=@.$;$..#=@..@#@.#        #     \n");
+			printf("     ~$$=*.$-$..@$@..@@-#.   ..,,*-,,,, \n");
+			printf("        !;;=,=..@$@..@@-#;   ;;!!!!!!!! \n");
+			printf("        -$@::$..@$@..@@=~               \n");
+			printf("         ..  .  ... .=..				 \n");
+			Sleep(300);
+			system("cls");
+			break;
+		}
+	}
+}
+
+void CD_sleep(int CD_Y) {
+	gotoxy(0, CD_Y);
+	int i;
+	for (i = 0; i <= 2; i++) {
+		switch (i)
+		{
+		case 0:
+			printf("									     \n");
+			printf("									     \n");
+			printf("									     \n");
+			printf("									     \n");
+			printf("									     \n");
+			printf("									     \n");
+			printf("									     \n");
+			printf("									     \n");
+			printf("									     \n");
+			printf("									     \n");
+			printf("         ,,,,,.  .,     .,.             \n");
+			printf("      ,.;!!!!-  :!     ~!;~:            \n");
+			printf("     :,.-                 ,~*           \n");
+			printf("    $. *~                   ..~         \n");
+			printf("   ~   ....:-                 .         \n");
+			printf("   # .;*=**,                  ,;.~~~.   \n");
+			printf("    ~;-$,*,-*-                  ;=;;;~  \n");
+			printf("     -=~ ,#$;             ,*$$$-;@#$;:  \n");
+			printf("       ~#@#;                   -#~      \n");
+			printf("            .!==;.----           =.     \n");
+			printf("                 .:;;:.    ,;;;;-~      \n");
+			printf("                           .,---.       \n");
+			printf("									     \n");
+			printf("									     \n");
+			printf("									     \n");
+			printf("									     \n");
+			printf("									     \n");
+			printf("									     \n");
+			printf("									     \n");
+			printf("									     \n");
+			printf("									     \n");
+			printf("									     \n");
+			Sleep(300);
+			system("cls");
+			break;
+
+		case 1:
+			printf("									     \n");
+			printf("									     \n");
+			printf("									     \n");
+			printf("									     \n");
+			printf("									     \n");
+			printf("									     \n");
+			printf("									     \n");
+			printf("									     \n");
+			printf("									     \n");
+			printf("									     \n");
+			printf("               .::,;;   ~!:,,           \n");
+			printf("      ,*-      .~~.        ,,!          \n");
+			printf("     .*.                     .$,        \n");
+			printf("    .$ :-                      ,,       \n");
+			printf("    #  ,~  ,~                  ,;.~~.   \n");
+			printf("    # ,;:,!:                    ;=!::-  \n");
+			printf("   !- -#$.~,                    ;;$ ,-  \n");
+			printf("    -@$-  #                 -#@@@~      \n");
+			printf("         !===;. .-----.         .!      \n");
+			printf("                ,;;;;:,  .;;;;;~,,      \n");
+			printf("                          ,,--,.        \n");
+			printf("									     \n");
+			printf("									     \n");
+			printf("									     \n");
+			printf("									     \n");
+			printf("									     \n");
+			printf("									     \n");
+			printf("									     \n");
+			printf("									     \n");
+			printf("									     \n");
+			printf("									     \n");
+			printf("									     \n");
+			Sleep(300);
+			system("cls");
+			break;
+
+		case 2:
+			printf("									     \n");
+			printf("									     \n");
+			printf("									     \n");
+			printf("									     \n");
+			printf("									     \n");
+			printf("									     \n");
+			printf("									     \n");
+			printf("									     \n");
+			printf("									     \n");
+			printf("									     \n");
+			printf("									     \n");
+			printf("									     \n");
+			printf("           ,;$###########,              \n");
+			printf("    ..-##~                 .=####-....  \n");
+			printf(" .~.!!  -   ,.                    !=!*: \n");
+			printf(" ;:.    =*!:,.                     ., - \n");
+			printf(" ~~     ,--::                    .=~    \n");
+			printf("  ;@-  :#@@@;                      #    \n");
+			printf("     =!,       =*:*==*-   .-------,*    \n");
+			printf("                          .;;;;;;:-     \n");
+			printf("									     \n");
+			printf("									     \n");
+			printf("									     \n");
+			printf("									     \n");
+			printf("									     \n");
+			printf("									     \n");
+			printf("									     \n");
+			printf("									     \n");
+			printf("									     \n");
+			printf("									     \n");
+			printf("									     \n");
+			printf("									     \n");
+			Sleep(300);
+			system("cls");
+			break;
+		}
+	}
+}
+
+void CD_play(int CD_Y) {
+	gotoxy(0, CD_Y);
+	int i;
+	for (i = 0; i <= 3; i++) {
+		switch (i)
+		{
+		case 0:
+			printf("									     \n");
+			printf("									     \n");
+			printf("									     \n");
+			printf("									     \n");
+			printf("									     \n");
+			printf("                .*$==$*.                \n");
+			printf("                *=.  ;=;                \n");
+			printf("               .=.   ,-$.               \n");
+			printf("              !@= =##= =@               \n");
+			printf("              ##  , .,,=@               \n");
+			printf("              ;#  ~ ,, *!               \n");
+			printf("               ~       ,                \n");
+			printf("               !                        \n");
+			printf("               #                        \n");
+			printf("     :,   ,   #        ;               \n");
+			printf("     :;~- !,   *        $               \n");
+			printf("      -#~ .    ,        .        ~$:    \n");
+			printf("    .,#: $ ;             .      ;~$.!   \n");
+			printf(" ., !!     ~             !    ~,-;@~    \n");
+			printf(" .;-~;     ;-  ;          :   ~   ~::   \n");
+			printf("  . .-!     .  ,          ~:        .   \n");
+			printf("            ;--            ;~           \n");
+			printf(" -----;*----!-  ;@@@@@@@@#  ;$:~---~---.\n");
+			printf(".@@@@@@@@@@@=. .@@@@@@@@@@~  :@@@@@@@@@~\n");
+			printf(".@@@@@@@@@@@; .$@@@@@@@@@@@=- @@@@@@@@@~\n");
+			printf(".@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@~\n");
+			printf(".@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@~\n");
+			printf(".@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@~\n");
+			printf(".@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@~\n");
+			printf(".@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@~\n");
+			printf(".@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@~\n");
+			printf(" !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!,\n");
+			Sleep(300);
+			system("cls");
+			break;
+
+		case 1:
+
+			printf("									     \n");
+			printf("									     \n");
+			printf("									     \n");
+			printf("									     \n");
+			printf("									     \n");
+			printf("									     \n");
+			printf("                   ;*=*@;,              \n");
+			printf("                   *#-. ,-#~            \n");
+			printf("                 =@  ~,  -;             \n");
+			printf("                 ;@. .!-. -*            \n");
+			printf("                 -$. .;.,:-@;           \n");
+			printf("                  ,  .-. --@:           \n");
+			printf("                           .            \n");
+			printf("                 :-                     \n");
+			printf("                 .                      \n");
+			printf("                ,~        ;             \n");
+			printf("                .,       .*             \n");
+			printf("          .,=## .        .!             \n");
+			printf("      :-- !., , :         .  ~~~,       \n");
+			printf("    ~!- ~  .-  ;            ~:::,:.     \n");
+			printf("   !,,       ; ,          -:*..$:.  .   \n");
+			printf("     #       ,#            ;~           \n");
+			printf("------------*@= -@@@@@@@@# ~#@@@=~:@@=; \n");
+			printf("*@@@@@@@@@@@@*  -@@@@@@@@#  =@@@@@@@@@@.\n");
+			printf("-@@@@@@@@@@@@~  $@@@@@@@@#  ,#@@@@@@@@@.\n");
+			printf("-@@@@@@@@@@@@; @@@@@@@@@@@=  #@@@@@@@@@.\n");
+			printf("-@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@.\n");
+			printf("-@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@.\n");
+			printf("-@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@.\n");
+			printf("-@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@.\n");
+			printf("-@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@.\n");
+			printf(",!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! \n");
+			Sleep(300);
+			system("cls");
+			break;
+
+
+		case 2:
+			printf("									     \n");
+			printf("									     \n");
+			printf("									     \n");
+			printf("									     \n");
+			printf("									     \n");
+			printf("									     \n");
+			printf("									     \n");
+			printf("									     \n");
+			printf("			    	.@@@@#              \n");
+			printf("                  ,~=;  ,$=.            \n");
+			printf("                 -$!    ; *;            \n");
+			printf("               ,#@. ;  * -#,            \n");
+			printf("               -@~  =@!@ -@-            \n");
+			printf("         ,      ~,       -$~  .         \n");
+			printf("      -,.,;      ;-         : :;        \n");
+			printf("     **,!$       ,.          ;#         \n");
+			printf("     #,!~=.*                 ..         \n");
+			printf("    -$-:        -:             -:       \n");
+			printf("  ~,            -         .,            \n");
+			printf("  -!  :    --  !-         -;;           \n");
+			printf("  .,  .     . =,           .=.   ;      \n");
+			printf("            ;@.            ;@.          \n");
+			printf(" -----;*----;,  =@@@@@@@@@, ;@@;;;;@:-- \n");
+			printf(".@@@@@@@@@@@;  !@@@@@@@@@@#- :;@@@@@@@@.\n");
+			printf(".@@@@@@@@@@=. *@@@@@@@@@@@@#-  ;@@@@@@@.\n");
+			printf(".@@@@@@@@@@@=$@@@@@@@@@@@@@@@..@@@@@@@@.\n");
+			printf(".@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@.\n");
+			printf(".@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@.\n");
+			printf(".@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@.\n");
+			printf(".@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@.\n");
+			printf(".@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@.\n");
+			printf(" !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! \n");
+			Sleep(300);
+			system("cls");
+			break;
+
+		case 3:
+			printf("									     \n");
+			printf("									     \n");
+			printf("									     \n");
+			printf("									     \n");
+			printf("									     \n");
+			printf("									     \n");
+			printf("									     \n");
+			printf("                *==.                    \n");
+			printf("               @#$@@#                   \n");
+			printf("            .#*    $@*                 \n");
+			printf("   ~ :  ~;   != ~    *@-                \n");
+			printf("   , ~; ~~  ~#, ,~=  -*.                \n");
+			printf("    #:~;     =.                         \n");
+			printf("   .=  .. #           .           ,.$;  \n");
+			printf("   :   -! #           -,         -!~,;, \n");
+			printf("    !   =.#            :        ~: ~.;, \n");
+			printf("    .   . #   $        =.      -;    .  \n");
+			printf("  :~      .   #                         \n");
+			printf("   :      !   ~         ~~    ~     ,~  \n");
+			printf("           :  -          ::   ~     :   \n");
+			printf("     .!    --!,           ~: =      .   \n");
+			printf("                            *.     #    \n");
+			printf(" -----;*---    -----------,   *.------- \n");
+			printf(".@@@@@@@@@#   ;@@@@@@@@@@@#-   -@@@@@@@.\n");
+			printf(".@@@@@@@@@# ~=@@@@@@@@@@@@@#===$@@@@@@@.\n");
+			printf(".@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@.\n");
+			printf(".@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@.\n");
+			printf(".@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@.\n");
+			printf(".@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@.\n");
+			printf(".@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@.\n");
+			printf(".@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@.\n");
+			printf(" !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! \n");
+			Sleep(300);
+			system("cls");
+			break;
+		}
+	}
+}
+
+
+/* 이것도 움직이기에서 가져옴
+
+int main(void)
+
+{
+
+	SetConsoleView(); 콘솔 크기 바꾸는거
+
+	int CD_Y = CD_BOTTOM_Y; 이건 뭘까
+
+	while (1) {
+		//CD(CD_Y); 함수 호출하게
+
+		//CD_eat(CD_Y);
+
+		//CD_sleep(CD_Y);
+
+		//CD_play(CD_Y);
+	}
+
+	system("pause");
+
+	return 0;
+
+}
+
 */
