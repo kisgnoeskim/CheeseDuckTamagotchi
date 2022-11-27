@@ -825,20 +825,6 @@ int inGameDisplay() { //ㄹㅇ 진또배기 게임
 		gotoxy(25, 41);
 		textcolor(BLACK, WHITE);
 		printf("(방향키로 조작하세요!)");
-
-
-
-
-		/*
-		if (GetAsyncKeyState(VK_RETURN) == TRUE) { //vk_return이 엔터임 저거 그대로 구글링하면 가상키보드 뭐시기 뜨는데 거기 여러가지 있음
-			system("cls");
-			for (int i = 0; i <= 3; i++)
-				CD_eat(CD_Y);
-		}
-		else {
-			continue;
-		}
-		*/
 		textcolor(BLACK, WHITE);
 	} //while 닫기
 } //ingame 함수 닫기
