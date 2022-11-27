@@ -653,7 +653,7 @@ int inGameDisplay() { //ㄹㅇ 진또배기 게임
 	오류 1. 하얀색 화면이 삐꾸임 (gotoxy 조절하면 될듯)
 	오류 2. 화면이 깜빡이는데 더블 버퍼링을 쓰면 해결된대
 	오류 3. 배고픔이 다 닳으면 5칸에서 갑자기 3칸이됨
-	오류 4. 왜 눌러도 밥먹기 화면으로 안넘어가는거야
+	오류 4. 왜 밥먹고 오면 창이 두개가 된것같지 그냥 버그같음 이정도면 무시해도 될듯
 	*/
 
 	int hungry = 5; // 헝그리 스텟 5
@@ -758,10 +758,30 @@ int inGameDisplay() { //ㄹㅇ 진또배기 게임
 				break;
 			case ENTER:
 				system("cls");
-				if (sel == 1) CD_eat(0);
-				else if (sel == 2) CD_play(0);
-				else if (sel == 3) CD_sleep(0);
-				else if (sel = 4) CD(0);
+				if (sel == 1) {
+					CD_eat(0);
+					if (hungry < 5) //배고픔이 5보다 작으면 1 추가되게
+						hungry++;
+					if (hungry >= 5) //배고픔이 5 이상이면 이상하게 칸이 없어질때가 있음 그래서 5 이상이면 그냥 넘어가게
+						break;
+				}
+				else if (sel == 2) {
+					CD_play(0);
+					if (bored < 5)
+						bored--;
+					if (bored >= 5)
+						break;
+				}
+				else if (sel == 3) {
+					CD_sleep(0);
+					if (tired < 5)
+						tired--;
+					if (tired >= 5)
+						break;
+				}
+				else if (sel = 4) {
+					CD(0);
+				}
 				system("cls");
 				ScreenTmp();
 				textcolor(BLACK, WHITE);
@@ -796,11 +816,18 @@ int inGameDisplay() { //ㄹㅇ 진또배기 게임
 		printf("잠자기");
 
 		gameButton(44, 36);
-		gotoxy(50, 37);
+		gotoxy(49, 37);
 		textcolor(BLACK, WHITE);
 		if (sel == 4)
 			textcolor(WHITE, BLACK);
-		printf("임시");
+		printf("새로고침");
+
+		gotoxy(25, 41);
+		textcolor(BLACK, WHITE);
+		printf("(방향키로 조작하세요!)");
+
+
+
 
 		/*
 		if (GetAsyncKeyState(VK_RETURN) == TRUE) { //vk_return이 엔터임 저거 그대로 구글링하면 가상키보드 뭐시기 뜨는데 거기 여러가지 있음
