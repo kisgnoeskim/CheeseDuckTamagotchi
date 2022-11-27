@@ -22,6 +22,12 @@ int CD_Y = CD_BOTTOM_Y; //움직이기에서 가져옴
 time_t st;
 
 int isend = 0;
+
+void ClearLineFromReadBuffer(void)
+{
+	while (getchar() != '\n');        //  문자열의 끝 '엔터키'가 들어올때까지 계속 Read가 되어짐. 즉, 버퍼의 값을 사용하지 않고 그냥 버려짐.
+}
+
 void clearScreen() //o 누르면 화면 하얘지는거
 {
 
@@ -39,6 +45,58 @@ void clearScreen() //o 누르면 화면 하얘지는거
 		gotoxy(21, 3 + Loop);
 		printf("                                              ");
 	}
+}
+
+void ScreenTmp() {
+	SetConsoleTitle(TEXT("치즈덕 다마고치!")); //콘솔창 이름 설정
+	int Loop = 0;
+	textcolor(WHITE, BLACK);
+	system("mode con: cols=150 lines=90"); //콘솔창 크기 설정
+
+	printf("┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓\n");
+	printf("┃                                                                                        ┃\n");
+	printf("┃                   ┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓                     ┃\n");
+	printf("┃                   ┃                                              ┃                     ┃\n");
+	printf("┃                   ┃                                              ┃                     ┃\n");
+	printf("┃                   ┃                                              ┃                     ┃\n");
+	printf("┃                   ┃                                              ┃                     ┃\n");
+	printf("┃                   ┃                                              ┃                     ┃\n");
+	printf("┃                   ┃                                              ┃                     ┃\n");
+	printf("┃                   ┃                                              ┃                     ┃\n");
+	printf("┃                   ┃                                              ┃                     ┃\n");
+	printf("┃                   ┃                                              ┃                     ┃\n");
+	printf("┃                   ┃                                              ┃                     ┃\n");
+	printf("┃                   ┃                                              ┃                     ┃\n");
+	printf("┃                   ┃                                              ┃                     ┃\n");
+	printf("┃                   ┃                                              ┃                     ┃\n");
+	printf("┃                   ┃                                              ┃                     ┃\n");
+	printf("┃                   ┃                                              ┃                     ┃\n");
+	printf("┃                   ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛                     ┃\n");
+	printf("┃                                                                                        ┃\n");
+	printf("┣━━━━━━━━┳━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━┫\n");
+	printf("┃ ||||||                           (O를 눌러 전원켜기)                            |||||| ┃\n");
+	printf("┣━━━━━━━━┻━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┻━━━━━━━━┫\n");
+	printf("┃                                                                                        ┃\n");
+	printf("┃                   ┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓                     ┃\n");
+	printf("┃                   ┃                                              ┃                     ┃\n");
+	printf("┃                   ┃                                              ┃                     ┃\n");
+	printf("┃                   ┃                                              ┃                     ┃\n");
+	printf("┃                   ┃                                              ┃                     ┃\n");
+	printf("┃                   ┃                                              ┃                     ┃\n");
+	printf("┃                   ┃                                              ┃                     ┃\n");
+	printf("┃                   ┃                                              ┃                     ┃\n");
+	printf("┃                   ┃                                              ┃                     ┃\n");
+	printf("┃                   ┃                                              ┃                     ┃\n");
+	printf("┃                   ┃                                              ┃                     ┃\n");
+	printf("┃                   ┃                                              ┃                     ┃\n");
+	printf("┃                   ┃                                              ┃                     ┃\n");
+	printf("┃                   ┃                                              ┃                     ┃\n");
+	printf("┃                   ┃                                              ┃                     ┃\n");
+	printf("┃                   ┃                                              ┃                     ┃\n");
+	printf("┃                   ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛                     ┃\n");
+	printf("┃                                                                                        ┃\n");
+	printf("┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛\n");
+	textcolor(BLACK, WHITE);
 }
 
 //이 upclear랑 downclear가 뭔지 모르겠네 그냥 닌텐도 위에 화면 아래 화면인것 같은데 이걸 호출을 안하는데?
@@ -608,6 +666,7 @@ int inGameDisplay() { //ㄹㅇ 진또배기 게임
 	int boredon = 0;
 
 	int sel = 1; //왼쪽 위 부터 1,2,3,4
+	ClearLineFromReadBuffer();
 
 	while (isend == 0) {
 		gotoxy(25, 27);
@@ -662,6 +721,8 @@ int inGameDisplay() { //ㄹㅇ 진또배기 게임
 		/*
 		게임 버튼 ex) 밥주기, 놀아주기
 		*/
+
+
 		char key = _kbhit();
 		if (_kbhit()) {
 			char key = _getch();
@@ -696,12 +757,22 @@ int inGameDisplay() { //ㄹㅇ 진또배기 게임
 				key = NULL;
 				break;
 			case ENTER:
+				system("cls");
+				if (sel == 1) CD_eat(0);
+				else if (sel == 2) CD_play(0);
+				else if (sel == 3) CD_sleep(0);
+				else if (sel = 4) CD(0);
+				system("cls");
+				ScreenTmp();
+				textcolor(BLACK, WHITE);
+				clearScreen();
 				//엔터키 입력시 이벤트 추가
 				break;
 			default:
 				break;
 			}
 		}
+
 
 		gameButton(25, 32);
 		gotoxy(31, 33);
