@@ -1,9 +1,6 @@
 ﻿#include "tools.h"
 #include "screen.h"
 #include <time.h>
-
-//---------------------
-
 #include <stdio.h> //움직이기에서 가져옴
 #include <Windows.h>
 #include <conio.h>
@@ -16,12 +13,18 @@ int CD_Y = CD_BOTTOM_Y; //움직이기에서 가져옴
 #define TIREDTIME 5000
 #define BOREDTIME 5000
 
+#define LEFT 75  //왼쪽 방향키
+#define RIGHT 77 //오른쪽 방향키
+#define UP 72   //위쪽 방향키
+#define DOWN 80 //아래 방향키
+#define ENTER 13 //아래 방향키
+
 time_t st;
 
 int isend = 0;
 void clearScreen() //o 누르면 화면 하얘지는거
 {
-	
+
 	int Loop = 0;
 	int Pass = 0;
 
@@ -588,7 +591,6 @@ int gameOn() // 게임 시작하는 함수
 int num = 0; //이제 필요 없는것 같은데 혹시 모르니까 안지움
 
 int inGameDisplay() { //ㄹㅇ 진또배기 게임
-
 	/*
 	오류 1. 하얀색 화면이 삐꾸임 (gotoxy 조절하면 될듯)
 	오류 2. 화면이 깜빡이는데 더블 버퍼링을 쓰면 해결된대
@@ -601,92 +603,145 @@ int inGameDisplay() { //ㄹㅇ 진또배기 게임
 
 	int tired = 0;
 	int tiredon = 0;
-	
+
 	int bored = 0;
 	int boredon = 0;
 
+	int sel = 1; //왼쪽 위 부터 1,2,3,4
+
 	while (isend == 0) {
-	gotoxy(25, 27);
-	textcolor(BLACK, WHITE);
-	printf("배고픔 : ");
-	
-	stateprint(32, 27, hungry);
-	time_t hungrytime = clock();
-	if ((hungrytime - st) % HUNGRYTIME < 20 && hungryon) { //hungry time은 맨 위에 있음 이걸로 줄어드는 시간 조절하는거임
-	hungry--;
-	stateprint(32, 27, hungry);
-	hungryon = 0;
-	}
-	if ((hungrytime - st) % HUNGRYTIME > 20) {
-		hungryon = 1;
-	}
+		gotoxy(25, 27);
+		textcolor(BLACK, WHITE);
+		printf("배고픔 : ");
 
-	gotoxy(45, 27);
-	textcolor(BLACK, WHITE);
-	printf("피곤함 : ");
+		stateprint(32, 27, hungry);
+		time_t hungrytime = clock();
+		if ((hungrytime - st) % HUNGRYTIME < 20 && hungryon) { //hungry time은 맨 위에 있음 이걸로 줄어드는 시간 조절하는거임
+			hungry--;
+			stateprint(32, 27, hungry);
+			hungryon = 0;
+		}
+		if ((hungrytime - st) % HUNGRYTIME > 20) {
+			hungryon = 1;
+		}
 
-	stateprint(55, 27, tired);
-	time_t tiredtime = clock();
-	if ((tiredtime - st) % TIREDTIME < 20 && tiredon) {
-		tired++;
+		gotoxy(45, 27);
+		textcolor(BLACK, WHITE);
+		printf("피곤함 : ");
+
 		stateprint(55, 27, tired);
-		tiredon = 0;
-	}
-	if ((tiredtime - st) % TIREDTIME > 20) {
-		tiredon = 1;
-	}
+		time_t tiredtime = clock();
+		if ((tiredtime - st) % TIREDTIME < 20 && tiredon) {
+			tired++;
+			stateprint(55, 27, tired);
+			tiredon = 0;
+		}
+		if ((tiredtime - st) % TIREDTIME > 20) {
+			tiredon = 1;
+		}
 
-	gotoxy(25, 30);
-	textcolor(BLACK, WHITE);
-	printf("지루함 : ");
-	
-	stateprint(32, 30, bored);
-	time_t boredtime = clock();
-	if ((boredtime - st) % BOREDTIME < 20 && boredon) {
-		bored++;
+		gotoxy(25, 30);
+		textcolor(BLACK, WHITE);
+		printf("지루함 : ");
+
 		stateprint(32, 30, bored);
-		boredon = 0;
-	}
-	if ((boredtime - st) % BOREDTIME > 20) {
-		boredon = 1;
-	}
+		time_t boredtime = clock();
+		if ((boredtime - st) % BOREDTIME < 20 && boredon) {
+			bored++;
+			stateprint(32, 30, bored);
+			boredon = 0;
+		}
+		if ((boredtime - st) % BOREDTIME > 20) {
+			boredon = 1;
+		}
 
-	gotoxy(45, 30);
-	textcolor(BLACK, WHITE);
-	printf("뭐쓰냐 : ");
+		gotoxy(45, 30);
+		textcolor(BLACK, WHITE);
+		printf("뭐쓰냐 : ");
 
-	/*
-	게임 버튼 ex) 밥주기, 놀아주기
-	*/
-	gameButton(25, 32);
-	gotoxy(31, 33);
-	textcolor(BLACK, WHITE);
-	printf("밥주기");
+		/*
+		게임 버튼 ex) 밥주기, 놀아주기
+		*/
+		char key = _kbhit();
+		if (_kbhit()) {
+			char key = _getch();
+			switch (key) //화면내 선택이동
+			{
+			case LEFT:
+				if (sel == 1) sel = 1;
+				else if (sel == 2) sel = 1;
+				else if (sel == 3) sel = 3;
+				else if (sel = 4) sel = 3;
+				key = NULL;
+				break;
+			case RIGHT:
+				if (sel == 1) sel = 2;
+				else if (sel == 2) sel = 2;
+				else if (sel == 3) sel = 4;
+				else if (sel = 4) sel = 4;
+				key = NULL;
+				break;
+			case UP:
+				if (sel == 1) sel = 1;
+				else if (sel == 2) sel = 2;
+				else if (sel == 3) sel = 1;
+				else if (sel = 4) sel = 2;
+				key = NULL;
+				break;
+			case DOWN:
+				if (sel == 1) sel = 3;
+				else if (sel == 2) sel = 4;
+				else if (sel == 3) sel = 3;
+				else if (sel = 4) sel = 4;
+				key = NULL;
+				break;
+			case ENTER:
+				//엔터키 입력시 이벤트 추가
+				break;
+			default:
+				break;
+			}
+		}
 
-	gameButton(44, 32);
-	gotoxy(49, 33);
-	textcolor(BLACK, WHITE);
-	printf("놀아주기");
+		gameButton(25, 32);
+		gotoxy(31, 33);
+		textcolor(BLACK, WHITE);
+		if (sel == 1)
+			textcolor(WHITE, BLACK);
+		printf("밥주기");
 
-	gameButton(25, 36);
-	gotoxy(31, 37);
-	textcolor(BLACK, WHITE);
-	printf("잠자기");
+		gameButton(44, 32);
+		gotoxy(49, 33);
+		textcolor(BLACK, WHITE);
+		if (sel == 2)
+			textcolor(WHITE, BLACK);
+		printf("놀아주기");
 
-	gameButton(44, 36);
-	gotoxy(31, 33);
-	textcolor(BLACK, WHITE);
-	printf("밥주기");
+		gameButton(25, 36);
+		gotoxy(31, 37);
+		textcolor(BLACK, WHITE);
+		if (sel == 3)
+			textcolor(WHITE, BLACK);
+		printf("잠자기");
 
-	if (GetAsyncKeyState(VK_RETURN) == TRUE) { //vk_return이 엔터임 저거 그대로 구글링하면 가상키보드 뭐시기 뜨는데 거기 여러가지 있음
-		system("cls");
-		for (int i = 0; i <= 3; i++)
-			CD_eat(CD_Y);
-	}
-	else {
-		continue;
-	}
+		gameButton(44, 36);
+		gotoxy(50, 37);
+		textcolor(BLACK, WHITE);
+		if (sel == 4)
+			textcolor(WHITE, BLACK);
+		printf("임시");
 
+		/*
+		if (GetAsyncKeyState(VK_RETURN) == TRUE) { //vk_return이 엔터임 저거 그대로 구글링하면 가상키보드 뭐시기 뜨는데 거기 여러가지 있음
+			system("cls");
+			for (int i = 0; i <= 3; i++)
+				CD_eat(CD_Y);
+		}
+		else {
+			continue;
+		}
+		*/
+		textcolor(BLACK, WHITE);
 	} //while 닫기
 } //ingame 함수 닫기
 
@@ -735,7 +790,7 @@ int UpDownGame()
 }
 
 //숫자야구 게임
-int NumberBaseballGame(){
+int NumberBaseballGame() {
 
 	int computerBall[3]; // 컴퓨터의 볼 체크
 
@@ -771,11 +826,11 @@ int NumberBaseballGame(){
 
 
 
-	while(1){ // 게임시작
+	while (1) { // 게임시작
 
 		printf("[%d회차 숫자야구]\n", count);
 
-		while(1) // 정상적인 숫자만 입력받기 위한 반복 
+		while (1) // 정상적인 숫자만 입력받기 위한 반복 
 
 		{
 
@@ -927,7 +982,7 @@ int gameover() { //게임끝
 
 /*
 int num = 5; // ●●●●● 이게 5개 있다고
-int bar() { // 배고픔 졸림 이런거 나타내기 위해서 
+int bar() { // 배고픔 졸림 이런거 나타내기 위해서
 	while (1) {
 		num--;
 		Sleep(30000); //30초에 한칸씩 깎이게
